@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#6c5ce7"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Novel Studio">
 <title>Novel Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Crimson+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -251,6 +252,7 @@ function merge(docs,first){const ids=new Set(docs.map(d=>d.id)),act=document.act
 function boot(){loadLocal();if(!S.lib.length){cur=addBook('My Novel');addCh()}if(!S.bk[cur])cur=S.lib[0].id;
  try{document.execCommand('defaultParagraphSeparator',false,'div')}catch(e){}openBook(cur);setStat('Saved on this device')}
 boot();
+if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
 const KEY='ns-key';
 async function api(method,qs,body){let k=localStorage.getItem(KEY);
  for(;;){if(!k){k=prompt('Enter your Novel Studio passphrase');if(!k)throw 0}
