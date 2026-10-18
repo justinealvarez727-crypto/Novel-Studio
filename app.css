@@ -105,3 +105,22 @@ aside{overflow:visible}.sf{display:flex;gap:6px;align-items:center;padding:4px 0
 .ev .tx{display:flex;flex-direction:column;gap:2px;padding:12px 0}.ev.up .tx{grid-row:1;justify-content:flex-end}.ev.dn .tx{grid-row:2;justify-content:flex-start}.ev .ed{font-size:12px;color:var(--acc);font-weight:600}.ev b{font-size:13px}.ev small{color:var(--mute)}.ev.on b{color:var(--acc)}
 .tled{background:var(--panel);border-radius:var(--r3);box-shadow:var(--sh);padding:12px 16px;margin-top:10px}.tled .fr>span{width:70px}.tled .ic.l{transform:rotate(90deg);margin-right:4px}.tled .ic.r{transform:rotate(-90deg);margin-left:4px}
 @media(max-width:760px){.trow{grid-template-columns:30px 1fr}.trow input,.trow select{grid-column:2}.trow textarea{grid-column:1/-1}.kv{grid-template-columns:1fr;gap:2px}.pv{padding:0 12px 80px}.crumb{padding:0 12px 8px}}
+
+/* ---- v6.1 layout cleanup ---- */
+.arow{flex-wrap:wrap;row-gap:0}
+.fmt{width:340px}.fmt .fr>span{width:82px}
+.mv .ic{width:14px;height:14px}.ch .t{min-width:0}
+.pv{container-type:inline-size}
+@container (max-width:680px){.trow{grid-template-columns:30px 1fr}.trow input,.trow select{grid-column:2}.trow textarea{grid-column:1/-1}.kv{grid-template-columns:1fr;gap:2px}.ibody .imeta .sw{margin-left:0}}
+.tltrack{height:240px}.ev .tx{overflow:hidden;min-height:0}.ev b{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.pan{max-height:42%;overflow:auto}
+.bc,.trow>*,.kv>*{min-width:0}.bt,.ititle{text-overflow:ellipsis}
+@media(max-width:760px){
+ header{gap:2px;padding:6px 8px}.logo{display:none}.ib{min-width:40px;height:40px}#title{flex:1 1 auto;min-width:0;font-size:17px}.tw{gap:0}
+ .pop,.pop.r{position:fixed;left:10px;right:10px;top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));width:auto;min-width:0;max-height:70dvh;overflow:auto;z-index:60}
+ .fmt{width:auto}.fmt .fr>span{width:76px}
+ .arow{gap:0}.arow .tick{flex:1 1 100%;padding:2px 0}.arow .tick+span{display:none}
+ .ititle{font-size:22px;min-width:0;width:100%}.ibanner{height:120px;padding:12px}
+ .pvh{flex-wrap:wrap}.pvh h2{font-size:20px;flex:1 1 100%}.rr{flex-wrap:wrap}.rr select,.rr input{flex:1 1 140px}
+ .zoom{right:22px}
+}

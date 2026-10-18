@@ -68,7 +68,13 @@ $('title').oninput=()=>{const n=S.lib.find(n=>n.id===cur);n.title=$('title').val
 $('newn').onclick=()=>{const id=addBook('Untitled novel');addCh();cur=id;save('lib');save('m_'+id);openBook(id);$('title').focus()};
 for(const k in DEF)$(k).oninput=()=>{const v=$(k).value;B().fmt[k]=['size','ps','ind','mg'].includes(k)?+v:v;applyFmt();save('m_'+cur)};
 $('menu').onclick=()=>$('side').classList.toggle('open');
-$('theme').onclick=()=>{const d=document.documentElement;d.dataset.theme=getComputedStyle(d).getPropertyValue('--bg').trim()==='#17161d'?'light':'dark'};
+const themeNow=()=>document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+function setTheme(t,keep){document.documentElement.dataset.theme=t;try{if(keep)localStorage.setItem('ns-theme',t)}catch(e){}
+ $('theme').innerHTML=ic(t==='dark'?'sun':'moon');$('theme').setAttribute('aria-label',t==='dark'?'Switch to light mode':'Switch to dark mode');
+ const m=document.querySelector('meta[name=theme-color]');if(m)m.content=t==='dark'?'#16151c':'#6c5ce7'}
+let savedTheme=null;try{savedTheme=localStorage.getItem('ns-theme')}catch(e){}
+setTheme(savedTheme||themeNow(),false);
+$('theme').onclick=()=>setTheme(themeNow()==='dark'?'light':'dark',true);
 /* ---------- project: paragraph indents, plots, characters, notebook ---------- */
 const FI={'0':0,'1':1.5,'2':3},VIEWS={w:'wv',m:'mv',item:'iv',road:'rv',brk:'bv',tl:'tv'};
 const KINDS={char:{label:'Character',folder:'Characters',ic:'user',fields:['Role','Age','Appearance','Motivation','Goal','Fear / flaw','Arc: start','Arc: turning point','Arc: end']},
