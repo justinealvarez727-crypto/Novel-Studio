@@ -1,7 +1,7 @@
 
 const $=id=>document.getElementById(id);
 const ic=(n,c)=>`<svg class="ic ${c||''}" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${n}"/></svg>`;
-const DEF={font:'Lora',size:17,lh:'1.7',ps:8,ind:1.5,mg:64,al:'left'};
+const DEF={font:'Lora',size:17,lh:'1.7',ps:12,ind:1.5,mg:64,al:'left'};
 const KC={Character:'#ffb86b',Scene:'#a29bfe',Place:'#7bd88f',Idea:'#ff8fab'};
 let S={lib:[],bk:{},hist:{}},cur=null,cc=null,db=null,base=null,timers={},LS='novel-studio-v2',view='w',sel=null,link=false,drag=null;
 const uid=()=>Math.random().toString(36).slice(2,8);
@@ -33,7 +33,7 @@ function arm(b,fn){const o=b.dataset.o||(b.dataset.o=b.textContent);if(b.dataset
 function applyFmt(){const f=B().fmt,r=document.documentElement.style;
  r.setProperty('--font',f.font+',Georgia,serif');r.setProperty('--fs',f.size+'px');r.setProperty('--lh',f.lh);
  r.setProperty('--ps',f.ps+'px');r.setProperty('--ind',f.ind+'em');r.setProperty('--mg',f.mg+'px');r.setProperty('--al',f.al);
- for(const k in DEF)$(k).value=f[k];syncSeg()}
+ for(const k in DEF)$(k).value=f[k];$('psv').textContent=f.ps+'px';$('indv').textContent=f.ind+'em';syncSeg()}
 function renderList(){const b=B(),q=($('flt').value||'').toLowerCase();$('list').innerHTML=b.order.map((id,i)=>{const c=b.ch[id],a=id===cc;if(q&&!(c.title||'').toLowerCase().includes(q))return'';
  return `<div class="ch ${a?'act':''} ${c.done?'dn':''}" data-id="${id}" role="button" tabindex="0" ${a?'aria-current="true"':''}><span class="n">${c.done?ic('check'):i+1}</span><span class="t">${esc(c.title||'Untitled')}</span>${a?`<span class="mv"><button class="up" data-mv="-1" aria-label="Move up">${ic('chev')}</button><button data-mv="1" aria-label="Move down">${ic('chev')}</button></span>`:`<span class="w">${words(c.text)}</span>`}</div>`}).join('');
  $('tot').textContent='Book total: '+b.order.reduce((a,id)=>a+words(b.ch[id].text),0).toLocaleString()+' words';
@@ -177,7 +177,7 @@ document.addEventListener('click',e=>{document.querySelectorAll('.pop').forEach(
 $('nlist').onclick=e=>{const b=e.target.closest('[data-n]');if(b)openBook(b.dataset.n)};
 function syncSeg(){document.querySelectorAll('.seg').forEach(g=>{const v=$(g.dataset.for).value;g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))})}
 document.querySelectorAll('.seg').forEach(g=>g.onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=$(g.dataset.for);i.value=b.dataset.v;i.dispatchEvent(new Event('input'))});
-const PRE={manuscript:{font:'Times New Roman',size:16,lh:'2',ps:0,ind:1.5,mg:72,al:'left'},novel:{font:'Lora',size:17,lh:'1.5',ps:0,ind:1.5,mg:64,al:'justify'},airy:{font:'Crimson Pro',size:20,lh:'1.7',ps:10,ind:0,mg:56,al:'left'}};
+const PRE={manuscript:{font:'Times New Roman',size:16,lh:'2',ps:0,ind:1.5,mg:72,al:'left'},novel:{font:'Lora',size:17,lh:'1.6',ps:10,ind:1.5,mg:64,al:'justify'},airy:{font:'Crimson Pro',size:20,lh:'1.7',ps:16,ind:0,mg:56,al:'left'}};
 document.querySelectorAll('[data-pre]').forEach(b=>b.onclick=()=>{B().fmt={...DEF,...PRE[b.dataset.pre]};applyFmt();save('m_'+cur)});
 for(const[i,d]of[['sm',-1],['sp',1]])$(i).onclick=()=>{const z=$('size');z.value=Math.min(28,Math.max(12,+z.value+d));z.dispatchEvent(new Event('input'))};
 $('nb').onclick=()=>$('np').classList.toggle('open');$('nc').onclick=()=>$('np').classList.remove('open');
