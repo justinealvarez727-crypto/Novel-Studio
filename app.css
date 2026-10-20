@@ -134,3 +134,10 @@ aside{flex:0 0 248px;min-width:0}
  aside{visibility:hidden;overflow:hidden;transition:left .2s,visibility 0s .2s}
  aside.open{visibility:visible;transition:left .2s}
 }
+
+/* ---- v6.4 phone menus: drop down under the toolbar (visible above the keyboard) ---- */
+@media(max-width:760px){
+ header,.sf{position:relative}
+ .pw{position:static}
+ .pop,.pop.r{position:absolute;left:8px;right:8px;top:100%;bottom:auto;margin-top:4px;width:auto;min-width:0;max-height:60dvh;overflow:auto;z-index:60}
+}

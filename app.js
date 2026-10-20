@@ -172,7 +172,7 @@ $('tv').addEventListener('click',e=>{const tl=W().tl,t=e.target.closest('button'
  else if(t.id==='tdel')arm(t,()=>{const i=tl.findIndex(x=>x.id===tsel);if(i>=0)tl.splice(i,1);tsel=null;sv();renderTl()})});
 /* ---------- UI chrome ---------- */
 const closePops=()=>document.querySelectorAll('.pop').forEach(p=>p.hidden=true);
-[['nbtn','nmenu'],['aa','fmt'],['mb','more'],['addm','addmenu'],['ipb','ipop']].forEach(([b,m])=>$(b).onclick=()=>{const was=$(m).hidden;closePops();$(m).hidden=!was});
+[['nbtn','nmenu'],['aa','fmt'],['mb','more'],['addm','addmenu'],['ipb','ipop']].forEach(([b,m])=>$(b).onclick=()=>{const was=$(m).hidden;closePops();$(m).hidden=!was;if(was)setTimeout(()=>$(m).scrollIntoView({block:'nearest'}),30)});
 document.addEventListener('click',e=>{document.querySelectorAll('.pop').forEach(p=>{if(!p.parentElement.contains(e.target))p.hidden=true});if(e.target.closest('.pop .mi:not(.arm)'))closePops()});
 $('nlist').onclick=e=>{const b=e.target.closest('[data-n]');if(b)openBook(b.dataset.n)};
 function syncSeg(){document.querySelectorAll('.seg').forEach(g=>{const v=$(g.dataset.for).value;g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))})}
